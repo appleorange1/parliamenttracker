@@ -1,0 +1,48 @@
+*Requirements*
+
+This software was built and tested on Arch Linux ARM, but other
+Linux distributions should be fine.
+
+You will need the following dependencies to build the software:
+-The docx2txt.pl script, written by Sandeep Kumar, stored as
+ /usr/bin/docx2txt.pl (or otherwise in your PATH). I'm using
+ version 1.4.
+
+-zlib (including the -dev packages on Debian/Ubuntu). I'm using
+ version 1.2.8.
+
+-GCC. I'm using version 6.2.1 20160830.
+
+-wget
+
+-make
+
+-tar
+
+On Arch, you can install these packages with the command:
+# pacman -S docx2txt zlib gcc wget make tar
+
+*Build*
+To build the website, run the commands:
+$ make docs
+$ make release
+
+The "make docs" command downloads about 8MB of data from the 
+Victorian Parliament's website. Once you've run it once, you don't
+need to run it again for future builds. Just running "make release" 
+is enough.
+
+*Installing*
+If you just want to keep the website for personal viewing, just open
+index.html in a webbrowser. The website will work just as if you were
+accessing it online.
+
+If you want the website to be accessible on the internet, you'll need
+a webserver, such as Apache.
+To install, uncompress parliamenttracker_website_current.tar.xz in the
+root directory of your webserver.
+
+*License*
+Victorian Parliament Tracker is licensed under the GNU Affero General
+Public License Version 3.0 or (at your option) any later version.
+Copyright (C) Riley Baird 2017
