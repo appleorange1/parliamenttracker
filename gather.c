@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
 			fputs("<html>\n<style>\n#heading {\n\tfloat: left;\n}\n#menu {\n\tfloat: right;\n}\n#notices {\n\tclear: both;\n}\nli {\n\tmargin: 10px 0;\n}", member);
 			fputs("\n</style>\n<body>\n\t<title>\n\t\t", member);
 			fputs(fullnames[polipos], member);
-			fputs(" - Victorian Parliament Tracker\n\t</title>\n\t<div id=\"heading\">\n\t\t<b>Victorian Parliament Tracker</b>\n\t</div>\n\t<div id=\"menu\">\n\t\t<a href=\"../../index.html\">Home</a>\n\t\t<a href=\"../../members.html\">Members</a>\n\t\t<a href=\"../../about.html\">About</a>\n\t</div>\n\t<div id=\"notices\">\n\t<center><br><b><a href=\"https://en.wikipedia.org/wiki/", member);
+			fputs(" - Victorian Parliament Tracker\n\t</title>\n\t<div id=\"heading\">\n\t\t<b>Victorian Parliament Tracker</b>\n\t</div>\n\t<div id=\"menu\">\n\t\t<a href=\"../../index.html\">Home</a>\n\t\t<a href=\"../../members.html\">People</a>\n\t\t<a href=\"../../about.html\">About</a>\n\t</div>\n\t<div id=\"notices\">\n\t<center><br><b><a href=\"https://en.wikipedia.org/wiki/", member);
 			fputs(fullnames[polipos], member);
 			fputs("\">", member);
 			fputs(fullnames[polipos], member);
@@ -128,8 +128,8 @@ int main(int argc, char *argv[]) {
 	FILE *councilindex;
 	councilindex = fopen("index/council.html", "w");
 
-	fputs("<html>\n<head>\n<style>\n#heading {\n\tfloat: left;\n}\n#menu {\n\tfloat: right;\n}\n#contents {\n\tclear: both;\n}\n</style>\n\t<title>List of Legislative Assembly Divisions - Victorian Parliament Tracker</title>\n</head>\n\n<body>\n<div id=\"heading\">\n\t<b style=\"font-size: large\">Victorian Parliament Tracker</b>\n</div>\n<div id=\"menu\">\n\t<a href=\"../index.html\">Home</a>\n\t<a href=\"../members.html\">Members</a>\n\t<a href=\"../about.html\">About</a>\n</div>\n<div id=\"contents\">\n\t<b>\n\t\tList of Legislative Assembly Divisions\n\t</b>", assemblyindex);
-	fputs("<html>\n<head>\n<style>\n#heading {\n\tfloat: left;\n}\n#menu {\n\tfloat: right;\n}\n#contents {\n\tclear: both;\n}\n</style>\n\t<title>List of Legislative Council Divisions - Victorian Parliament Tracker</title>\n</head>\n\n<body>\n<div id=\"heading\">\n\t<b style=\"font-size: large\">Victorian Parliament Tracker</b>\n</div>\n<div id=\"menu\">\n\t<a href=\"../../index.html\">Home</a>\n\t<a href=\"../../members.html\">Members</a>\n\t<a href=\"../../about.html\">About</a>\n</div>\n<div id=\"contents\">\n\t<b>\n\t\tList of Legislative Council Divisions\n\t</b>", councilindex);
+	fputs("<html>\n<head>\n<style>\n#heading {\n\tfloat: left;\n}\n#menu {\n\tfloat: right;\n}\n#contents {\n\tclear: both;\n}\n</style>\n\t<title>List of Legislative Assembly Divisions - Victorian Parliament Tracker</title>\n</head>\n\n<body>\n<div id=\"heading\">\n\t<b style=\"font-size: large\">Victorian Parliament Tracker</b>\n</div>\n<div id=\"menu\">\n\t<a href=\"../index.html\">Home</a>\n\t<a href=\"../members.html\">People</a>\n\t<a href=\"../about.html\">About</a>\n</div>\n<div id=\"contents\">\n\t<b>\n\t\tList of Legislative Assembly Divisions\n\t</b>", assemblyindex);
+	fputs("<html>\n<head>\n<style>\n#heading {\n\tfloat: left;\n}\n#menu {\n\tfloat: right;\n}\n#contents {\n\tclear: both;\n}\n</style>\n\t<title>List of Legislative Council Divisions - Victorian Parliament Tracker</title>\n</head>\n\n<body>\n<div id=\"heading\">\n\t<b style=\"font-size: large\">Victorian Parliament Tracker</b>\n</div>\n<div id=\"menu\">\n\t<a href=\"../../index.html\">Home</a>\n\t<a href=\"../../members.html\">People</a>\n\t<a href=\"../../about.html\">About</a>\n</div>\n<div id=\"contents\">\n\t<b>\n\t\tList of Legislative Council Divisions\n\t</b>", councilindex);
 
 
 	char dates[argc][8];

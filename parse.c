@@ -183,7 +183,7 @@ int parse(FILE *index, int size, char proceedings[size], int isCouncil, int * us
 				printf("%s\n", title1);
 				fputs(title1, webpage);
 				fputs("\n</title>\n<style>\nimg {\n\tfloat: right;\n\tmargin: 0 0 10px 10px;\n}\np {\n\tfont-size: 3vh;\n}\n#heading {\n\tfloat: left;\n}\n#menu {\n\tfloat: right;\n}#individuals {\n\tclear:both;\n}\n</style>\n</head>\n\n<body>", webpage);
-				fputs("\n\t<div id=\"heading\">\n\t<b style=\"font-size: large\">Victorian Parliament Tracker</b>\n\t</div>\n\n\t<div id=\"menu\">\n\t<a href=\"../../../index.html\">Home</a>\n\t<a href=\"../../../members.html\">Members</a>\n\t<a href=\"../../../about.html\">About</a>\n\t</div>\n", webpage);
+				fputs("\n\t<div id=\"heading\">\n\t<b style=\"font-size: large\">Victorian Parliament Tracker</b>\n\t</div>\n\n\t<div id=\"menu\">\n\t<a href=\"../../../index.html\">Home</a>\n\t<a href=\"../../../members.html\">People</a>\n\t<a href=\"../../../about.html\">About</a>\n\t</div>\n", webpage);
 
 				fputs("\n\t<div id=\"individuals\">\n\t<br>\n\t<b>\n\t\t<center>\n\t\t\t", webpage);
 				fputs(title1, webpage);

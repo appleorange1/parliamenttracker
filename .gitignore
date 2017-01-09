@@ -1,5 +1,6 @@
 *.tar.xz
 docx/*docx
+*docx
 assembly
 council
 index
