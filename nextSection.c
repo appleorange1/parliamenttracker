@@ -15,6 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <stdint.h>
 #include <stdio.h>
 #include "firstPointer.c"
 char* nextSection(char const* pointer, int isCouncil) {
@@ -37,21 +38,23 @@ char* nextSection(char const* pointer, int isCouncil) {
 			char* commtype2 = strstr(pointer, "*   *\n\n");
 			char* committeesection = firstPointer(commtype1, commtype2);
 			char* normalsection = strstr(pointer, needle);
-			if (firstPointer(normalsection, committeesection) == normalsection) {
-				if ((int) normalsection < (int) closestsection) {
-					closestsection = normalsection;
-					if (num <= 9)
-						length = 3;
-					else if (num <= 99)
-						length = 4;
-					else
-						length = 5;
+			if (normalsection != 0) {
+				if (firstPointer(normalsection, committeesection) == normalsection) {
+					if ((intptr_t) normalsection < (intptr_t) closestsection || (intptr_t) closestsection == 0 ) {
+						closestsection = normalsection;
+						if (num <= 9)
+							length = 3;
+						else if (num <= 99)
+							length = 4;
+						else
+							length = 5;
+					}
 				}
-			}
-			else {
-				if ((int) committeesection < (int) closestsection) {
-					closestsection = committeesection;
-					length = 7;
+				else {
+					if ( ((intptr_t) committeesection < (intptr_t) closestsection) || ((intptr_t) closestsection == 0) ) {
+						closestsection = committeesection;
+						length = 7;
+					}
 				}
 			}
 			num++;

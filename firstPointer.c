@@ -16,7 +16,7 @@
 */
 
 char* firstPointer(char* p1, char* p2) {
-	if (((p1 < p2) && (p1 != 0)) || (p2 == 0))
+	if ((((intptr_t) p1 < (intptr_t) p2) && ((intptr_t) p1 != 0)) || ((intptr_t) p2 == 0))
 		return p1;
 	else
 		return p2;

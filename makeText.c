@@ -17,7 +17,14 @@
 
 #include <stdio.h>
 char * makeText(char *document) {
-	char str[80] = "docx2txt.pl ";
+	char str[80];
+	if (system("which docx2txt.pl > /dev/null") == 0)
+		sprintf(str, "docx2txt.pl ");
+	else if (system("which docx2txt > /dev/null") == 0)
+		sprintf(str, "docx2txt ");
+	else {
+		printf("Cannot find the docx2txt program!\nMake sure that it is installed and in your path.\nThe program can be downloaded from http://docx2txt.sourceforge.net/, or possibly your distro's package manager.");
+	}
 	char* output = tmpnam(NULL);
 	strcat(str," \"");
 	strcat(str,document);

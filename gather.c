@@ -72,11 +72,11 @@ int main(int argc, char *argv[]) {
 		else
 			dataset = fopen("council.data.1", "r");
 
-		char (*partynames)[100] = calloc(89, sizeof(*partynames));
-		char (*colors)[100] = calloc(89, sizeof(*colors));
-		char (*politicians)[100] = calloc(89, sizeof(*politicians));
-		char (*electorates)[100] = calloc(89, sizeof(*electorates));
-		char (*fullnames)[100] = calloc(89, sizeof(*fullnames));
+		char (*partynames)[100] = calloc(90, sizeof(*partynames));
+		char (*colors)[100] = calloc(90, sizeof(*colors));
+		char (*politicians)[100] = calloc(90, sizeof(*politicians));
+		char (*electorates)[100] = calloc(90, sizeof(*electorates));
+		char (*fullnames)[100] = calloc(90, sizeof(*fullnames));
 
 		int parties[89] = {0};
 		
@@ -248,47 +248,6 @@ int main(int argc, char *argv[]) {
 		}
 		data++;
 	}
-
-	/*
-	polipos = 1;
-	data = 0;
-	while (data <= 3) {
-		FILE *dataset;
-		if (data == 0)
-			dataset = fopen("assembly.data.0", "r");
-		else if (data == 1)
-			dataset = fopen("assembly.data.1", "r");
-		else if (data == 2)
-			dataset = fopen("council.data.0", "r");
-		else
-			dataset = fopen("council.data.1", "r");
-
-		char partynames[89][100] = {0};
-		char colors[89][100] = {0};
-		int parties[89] = {0};
-		char politicians[90][100] = {0};
-		char fullnames[90][100] = {0};
-		char electorates[89][100] = {0};
-		importData_2Dc(dataset, 90, 100, partynames);
-		importData_2Dc(dataset, 90, 100, colors);
-		importData_1Di(dataset, 90, parties);
-		importData_2Dc(dataset, 90, 100, politicians);
-		importData_2Dc(dataset, 90, 100, fullnames);
-		importData_2Dc(dataset, 90, 100, electorates);
-
-		while (polipos <= 89) {
-			FILE *member;
-			char filename[100] = {0};
-			sprintf(filename, "%s/members/%s.html", housename[data], fullnames[polipos]);
-			member = fopen(filename, "a");
-			fputs("\n\t</ul>\n</body>\n</html>", member);
-			fclose(member);
-			polipos++;
-		}
-		data++;
-	}
-	*/
-
 
 	return 0;
 }

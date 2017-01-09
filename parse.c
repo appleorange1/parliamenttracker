@@ -68,19 +68,11 @@ int parse(FILE *index, int size, char proceedings[size], int isCouncil, int * us
 			dataset = fopen("council.data.1","r");
 		chdir("council/divisions");
 	}
-	/*
-	char partynames[89][100] = {0};
-	char colors[89][100] = {0};
-	int parties[89] = {0};
-	char politicians[90][100] = {0};
-	char fullnames[90][100] = {0};
-	char electorates[89][100] = {0};
-	*/
-	char (*partynames)[100] = calloc(89, sizeof(*partynames));
-	char (*colors)[100] = calloc(89, sizeof(*colors));
-	char (*politicians)[100] = calloc(89, sizeof(*politicians));
-	char (*fullnames)[100] = calloc(89, sizeof(*fullnames));
-	char (*electorates)[100] = calloc(89, sizeof(*electorates));
+	char (*partynames)[100] = calloc(90, sizeof(*partynames));
+	char (*colors)[100] = calloc(90, sizeof(*colors));
+	char (*politicians)[100] = calloc(90, sizeof(*politicians));
+	char (*fullnames)[100] = calloc(90, sizeof(*fullnames));
+	char (*electorates)[100] = calloc(90, sizeof(*electorates));
 	int parties[89] = {0};
 
 	importData_2Dc(dataset, 90, 100, partynames);
@@ -188,6 +180,7 @@ int parse(FILE *index, int size, char proceedings[size], int isCouncil, int * us
 				}
 
 				fputs("<html>\n<head>\n<title>\n\t", webpage);
+				printf("%s\n", title1);
 				fputs(title1, webpage);
 				fputs("\n</title>\n<style>\nimg {\n\tfloat: right;\n\tmargin: 0 0 10px 10px;\n}\np {\n\tfont-size: 3vh;\n}\n#heading {\n\tfloat: left;\n}\n#menu {\n\tfloat: right;\n}#individuals {\n\tclear:both;\n}\n</style>\n</head>\n\n<body>", webpage);
 				fputs("\n\t<div id=\"heading\">\n\t<b style=\"font-size: large\">Victorian Parliament Tracker</b>\n\t</div>\n\n\t<div id=\"menu\">\n\t<a href=\"../../../index.html\">Home</a>\n\t<a href=\"../../../members.html\">Members</a>\n\t<a href=\"../../../about.html\">About</a>\n\t</div>\n", webpage);
@@ -337,15 +330,6 @@ int parse(FILE *index, int size, char proceedings[size], int isCouncil, int * us
 		section = nextSection(section+1, isCouncil);
 		j++;
 	}
-
-	/*
-	free(electorates);
-	free(fullnames);
-	free(politicians);
-	free(partynames);
-	free(colors);
-	free(parties);
-	*/
 
 	chdir(rootdir);
 	
