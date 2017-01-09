@@ -27,6 +27,11 @@ To build the website, run the commands:
 $ make docs
 $ make release
 
+I've been having trouble building on amd64/Debian, so if you are having
+trouble too, you may want to run these commands before running "make release".
+$ ulimit -s 65536
+$ make clean
+
 The "make docs" command downloads about 8MB of data from the 
 Victorian Parliament's website. Once you've run it once, you don't
 need to run it again for future builds. Just running "make release" 
