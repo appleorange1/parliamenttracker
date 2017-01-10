@@ -26,4 +26,4 @@ source:
 	tar -cJf parliamenttracker_source_$(VER).tar.xz *c *html assembly.data.* council.data.* questions.data docx/proceedings Makefile README LICENSE
 
 clean:
-	rm -rf assembly council index parliamenttracker a.out
+	rm -rf assembly council index parliamenttracker a.out *xz
