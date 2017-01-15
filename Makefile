@@ -35,4 +35,4 @@ source:
 	tar -cJf parliamenttracker_source_$(VER).tar.xz *c *html assembly.data.* council.data.* questions.data docx/proceedings Makefile qld/extract.py qld/hansard/hansard qld/hansard/getHansards.sh README LICENSE
 
 clean:
-	rm -rf assembly council index parliamenttracker a.out qld/divisions *xz
+	rm -rf assembly council index parliamenttracker a.out qld/divisions qld/index *xz
