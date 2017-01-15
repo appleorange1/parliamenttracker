@@ -6,3 +6,5 @@ council
 index
 parliamenttracker
 a.out
+qld/hansard/*pdf
+qld/hansard/*txt
