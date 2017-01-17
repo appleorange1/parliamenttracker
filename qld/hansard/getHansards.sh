@@ -1,6 +1,6 @@
 #!/bin/sh
 wget -w 3 -i hansard
-for pdf in `ls | grep pdf`
+for pdf in `ls | grep WEEKLY.pdf`
 do
 	echo "Extracting "$pdf
 	python3 pdf2txt.py -o $pdf".txt" $pdf
