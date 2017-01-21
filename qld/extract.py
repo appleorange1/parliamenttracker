@@ -215,6 +215,19 @@ for file in files:
 			if "Pair" in line:
 				division.write(line)
 
+			# For some strange reason, when pdf2txt.py processes
+			# division "Exhibited Animals Regulation" on
+			# 17 August 2016, the "AYES" heading is after the
+			# list of people who voted aye, not before it.
+			#
+			# As this does not appear to be repeated elsewhere,
+			# I have manually entered the data
+			if "AYES" in line and adler == "b1340b85":
+				ayesdict = {"LNP": 0, "ALP": 41, "KAP": 0, "INDEPENDENT": 2}
+				division.write("</u><p>\nALP,  41<p>\nINDEPENDENT, 2<p>")
+
+				fullvotes = "AYES, 43:<p>\nALP,  41 -- Bailey, Boyd, Brown, Butcher, Byrne, Crawford, D'Ath, de Brenni, Dick, Donaldson, Enoch, Farmer, Fentiman,\nFurner,  Gilbert,  Grace,  Harper,  Hinchliffe,  Jones,  Kelly,  King,  Lauga,  Linard,  Lynham,  Madden,  Miles,  Miller,  O'Rourke,\nPalaszczuk,  Pearce, Pease, Pegg, Pitt, Power, Russo, Ryan, Saunders, Stewart, Trad, Whiting, Williams.<p>\nINDEPENDENT, 2 -- Gordon,  Pyne.<br>\n"
+
 			if "AYES" in line or "NOES" in line:
 				division.write("</u>")
 
