@@ -4,6 +4,14 @@ This software was built and tested on Arch Linux ARM, but other
 Linux distributions should be fine.
 
 You will need the following dependencies to build the software:
+Needed for both Victoria and Queensland
+-wget
+
+-make
+
+-tar
+
+Only needed for Victoria:
 -The docx2txt.pl script, written by Sandeep Kumar, stored as
  /usr/bin/docx2txt.pl (or otherwise in your PATH). I'm using
  version 1.4.
@@ -13,29 +21,31 @@ You will need the following dependencies to build the software:
 
 -GCC. I'm using version 6.2.1 20160830.
 
--wget
+Only needed for Queensland:
 
--make
+-Python 3
 
--tar
+-The Python 3 version of pdfminer, which you can install using pip:
+ $ pip install pdfminer.six
+ I'm using version 20160614.
 
 On Arch, you can install these packages with the command:
-# pacman -S docx2txt zlib gcc wget make tar
+# pacman -S docx2txt zlib gcc wget make tar python pip
+# pip install pdfminer.six
 
 *Build*
 To build the website, run the commands:
+$ ulimit -s 65536
 $ make docs
 $ make release
 
-I've been having trouble building on amd64/Debian, so if you are having
-trouble too, you may want to run these commands before running "make release".
-$ ulimit -s 65536
-$ make clean
+The "make docs" command downloads data from the Parliament websites.
+If you run this command once, you don't have to run it again next time
+you build.
 
-The "make docs" command downloads about 8MB of data from the 
-Victorian Parliament's website. Once you've run it once, you don't
-need to run it again for future builds. Just running "make release" 
-is enough.
+If you just want to make the Victorian or Queensland websites, you
+can use "make vicdocs" and "make vicrelease", and "make qlddocs" and
+"make qldrelease".
 
 *Installing*
 If you just want to keep the website for personal viewing, just open
