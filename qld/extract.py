@@ -30,6 +30,7 @@ for file in files:
 	titlesearch = 0
 	linenum = 0
 	title = ""
+	titles = []
 
 	day = datetime.strptime(file, "hansard/%Y_%m_%d_WEEKLY.pdf.txt")
 	strdate = day.strftime("%Y%m%d")
@@ -55,9 +56,13 @@ for file in files:
 
 	for line in f:
 		if titlesearch == 1:
-			if line[0].isalpha():
-				title = title + line[:len(line)-2]
-			elif line[0].isdigit():
+			if line[0].isalpha() and "AYES" not in line and "NOES" not in line and "After clause" not in line:
+				if title == "":
+					title = line[:len(line)-2]
+				else:
+					title = title + " " + line[:len(line)-2]
+			elif line[0].isdigit() and title != "":
+				titles.append(title)
 				titlesearch = 0
 
 		if found == 1 and line[:len(line)-2].isdigit():
@@ -65,9 +70,9 @@ for file in files:
 			titlesearch = 1
 
 		if "AYES," in line:
-			adler = format(zlib.adler32(bytes(str(linenum) + title, 'utf-8')), '02x')
+			adler = format(zlib.adler32(bytes(str(linenum) + titles[len(titles)-2], 'utf-8')), '02x')
 			index.write("\n\t\t<a href=\"../divisions/" + strdate)
-			index.write("/" + adler + ".html\" >" + title)
+			index.write("/" + adler + ".html\" >" + titles[len(titles)-2])
 			index.write("</a><br/>")
 
 			division = codecs.open(adler + ".html", "w", 'utf-8')
@@ -75,7 +80,7 @@ for file in files:
 			division.write("<a href=\"../../index/assembly.html\">List of QLD divisions</a>\n")
 			division.write("<a href=\"http://vicvote.review\">Victorian Website</a>\n")
 			division.write("<b><center>")
-			division.write(title)
+			division.write(titles[len(titles)-2])
 			division.write(" (" + humandate + ")")
 			division.write("</center></b>\n")
 			division.write("<a href=\"https://www.parliament.qld.gov.au/documents/hansard/")
