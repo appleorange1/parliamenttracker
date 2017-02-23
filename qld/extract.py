@@ -12,9 +12,27 @@ if not os.path.exists("index"):
 	os.mkdir("index")
 
 index = codecs.open("index/assembly.html", 'w', 'utf-8')
-index.write(" <meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">\n")
-index.write("<a href=\"http://vicvote.review\">Victorian Website</a>\n\t<b><center>List of Queensland Legislative Assembly Divisions</center></b>\n")
+index.write("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">\n")
+index.write("<body>\n\t<title>\n\t\tList of Legislative Assembly Divisions - Queensland Parliament Tracker - See how your Parliament votes on important issues</title>\n\t")
+index.write("<div style=\"float: left;\">\n\t\t")
+index.write("<b style=\"font-size: large;\">Queensland Parliament Tracker</b>\n\t")
+index.write("</div>\n\n\t")
+index.write("<div style=\"float: right;\">\n\t\t")
+index.write("<a href=\"../index.html\">Home</a>\n\t\t")
+index.write("<a href=\"assembly.html\">Divisions</a>\n\t\t")
+index.write("<a href=\"http://vicvote.review/about.html\">About</a>\n\t\t")
+index.write("<a href=\"http://vicvote.review\">Victoria</a>\n\t")
+index.write("</div>\n\t")
+index.write("<b><u><center style=\"clear: both;\">List of Queensland Legislative Assembly Divisions</center></b></u>\n")
 
+homepage = codecs.open('index.html', 'w', 'utf-8')
+homepage.write(" <meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">\n")
+homepage.write("<body>\n\t<title>\n\t\tQueensland Parliament Tracker - See how your Parliament votes on issues that are important to you.\n\t</title>")
+homepage.write("\n\n\t<div style=\"float: left;\">\n\t<b style=\"font-size: large;\">Queensland Parliament Tracker</b>\n\t</div>")
+homepage.write("\n\n\t<div style=\"float: right;\">\n\t<a href=\"index.html\">Home</a>\n\t<a href=\"index/assembly.html\">Divisions</a>\n\t<a href=\"http://vicvote.review/about.html\">About</a>\n\t<a href=\"http://vicvote.review\">Victoria</a>\n\t</div>")
+homepage.write("\n\t<center style=\"clear: both;\"><b><u>Home</u></b></center>")
+homepage.write("\n\n\t<p>\n\t\tWe track every vote that happens in the Queensland Parliament (Legislative Assembly) and present it in a way that\'s easy to understand.\n\t</p>")
+homepage.write("\n\t<p>\n\t\tExplore the votes with easy-to-read summaries below, or dive in to the full list of <a href=\"index/assembly.html\">unsorted divisions</a> to see what you can find.\n\t</p>\n\n\t<ol>")
 
 files = []
 
@@ -32,7 +50,10 @@ for file in files:
 	title = ""
 	titles = []
 
-	day = datetime.strptime(file, "hansard/%Y_%m_%d_WEEKLY.pdf.txt")
+	if "WEEKLY" in file:
+		day = datetime.strptime(file, "hansard/%Y_%m_%d_WEEKLY.pdf.txt")
+	else:
+		day = datetime.strptime(file, "hansard/%Y_%m_%d_DAILY.pdf.txt")
 	strdate = day.strftime("%Y%m%d")
 	humandate = day.strftime("%e %B %Y")
 	year = day.strftime("%Y")
@@ -47,10 +68,10 @@ for file in files:
 	os.chdir(strdate)
 
 	f = codecs.open("../../" + file, 'r', 'utf-8')
-	ayesdict = {"LNP": 0, "ALP": 0, "KAP": 0, "INDEPENDENT": 0}
-	noesdict = {"LNP": 0, "ALP": 0, "KAP": 0, "INDEPENDENT": 0}
-	parties = ["LNP","ALP","KAP","INDEPENDENT"]
-	colors = {"LNP": "blue", "ALP": "red", "KAP": "lightcoral", "INDEPENDENT": "gray"}
+	ayesdict = {"LNP": 0, "ALP": 0, "KAP": 0, "PHON": 0, "INDEPENDENT": 0}
+	noesdict = {"LNP": 0, "ALP": 0, "KAP": 0, "PHON": 0, "INDEPENDENT": 0}
+	parties = ["LNP","ALP","KAP","PHON","INDEPENDENT"]
+	colors = {"LNP": "blue", "ALP": "red", "KAP": "orange", "PHON": "#f8f12f", "INDEPENDENT": "gray"}
 	speaker = "none"
 	fullvotes = ""
 
@@ -71,18 +92,48 @@ for file in files:
 
 		if "AYES," in line:
 			adler = format(zlib.adler32(bytes(str(linenum) + titles[len(titles)-2], 'utf-8')), '02x')
+			fixedlinenum = str(linenum)
 			index.write("\n\t\t<a href=\"../divisions/" + strdate)
-			index.write("/" + adler + ".html\" >" + titles[len(titles)-2])
+			index.write("/" + fixedlinenum + ".html\" >" + titles[len(titles)-2])
 			index.write("</a><br/>")
 
-			division = codecs.open(adler + ".html", "w", 'utf-8')
+			division = codecs.open(fixedlinenum + ".html", "w", 'utf-8')
 			division.write("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">\n")
-			division.write("<a href=\"../../index/assembly.html\">List of QLD divisions</a>\n")
-			division.write("<a href=\"http://vicvote.review\">Victorian Website</a>\n")
-			division.write("<b><center>")
+			division.write("<title>" + titles[len(titles)-2] + "</title>\n")
+			division.write("<div style=\"float: left;\">\n\t\t")
+			division.write("<b style=\"font-size: large;\">Queensland Parliament Tracker</b>\n\t")
+			division.write("</div>\n\n\t")
+			division.write("<div style=\"float: right;\">\n\t\t")
+			division.write("<a href=\"../../index.html\">Home</a>\n\t\t")
+			division.write("<a href=\"../../index/assembly.html\">Divisions</a>\n\t\t")
+			division.write("<a href=\"http://vicvote.review/about.html\">About</a>\n\t\t")
+			division.write("<a href=\"http://vicvote.review\">Victoria</a>\n\t")
+			division.write("</div>\n\t")
+			division.write("<b><center style=\"clear: both;\">")
 			division.write(titles[len(titles)-2])
 			division.write(" (" + humandate + ")")
 			division.write("</center></b>\n")
+
+			flag = 0
+			summary = ""
+			summaries = open("../../summaries", "r")
+			for line2 in summaries:
+				if flag == 2:
+					summary = line2
+					homepage.write("\n\t\t<li style=\"margin: 10px 0;\">")
+					homepage.write("<a href=\"divisions/" + strdate + "/" + fixedlinenum + ".html\">" + summary + "</a></li>")
+					flag = -1
+				if flag == 1:
+					if fixedlinenum in line2:
+						flag = 2
+					else:
+						flag = 0
+				if strdate in line2:
+					flag = 1
+
+
+			division.write("<center><i>" + summary + "</i></center><p>\n")
+
 			division.write("<a href=\"https://www.parliament.qld.gov.au/documents/hansard/")
 			division.write(year)
 			division.write("/" + file.split(".txt")[0].split("hansard/")[1] + "\">")
@@ -92,9 +143,9 @@ for file in files:
 			division.write(title)
 			division.write("\">Search on DuckDuckGo</a>\n")
 			division.write("<img src=\"")
-			division.write(adler + ".svg")
+			division.write(fixedlinenum + ".svg")
 			division.write("\" width=\"40%\" height=\"70%\" style=\"float: right; width: 49%;\" alt=\"Coloured circles representing parties with \'Ayes\' on the left and \'Noes\' on the right\"/>")
-			svg = open(adler + ".svg", "w")
+			svg = open(fixedlinenum + ".svg", "w")
 			votes = "ayes"
 		elif "NOES," in line:
 			votes = "noes"
@@ -164,8 +215,8 @@ for file in files:
 			division.write(fullvotes)
 			division.write("</div>\n")
 
-			ayesdict = {"LNP": 0, "ALP": 0, "KAP": 0, "INDEPENDENT": 0}
-			noesdict = {"LNP": 0, "ALP": 0, "KAP": 0, "INDEPENDENT": 0}
+			ayesdict = {"LNP": 0, "ALP": 0, "KAP": 0, "PHON": 0, "INDEPENDENT": 0}
+			noesdict = {"LNP": 0, "ALP": 0, "KAP": 0, "PHON": 0, "INDEPENDENT": 0}
 			speaker = "none"
 			votes = "none"
 			fullvotes = ""
@@ -201,8 +252,8 @@ for file in files:
 				#There was only one conscience vote, so I'm
 				#entering it in manually
 				if ":" not in line and (adler == "3d151845" or adler == "3c0e1841"):
-					ayesdict = {"LNP": 20, "ALP": 43, "KAP": 0, "INDEPENDENT": 1}
-					noesdict = {"LNP": 20, "ALP": 0, "KAP": 2, "INDEPENDENT": 0}
+					ayesdict = {"LNP": 20, "ALP": 43, "KAP": 0, "PHON": 0, "INDEPENDENT": 1}
+					noesdict = {"LNP": 20, "ALP": 0, "KAP": 2, "PHON": 0, "INDEPENDENT": 0}
 			pos = 0
 			if len(line) >= 2 and not("Speaker" in line or "SPEAKER" in line or "Pair" in line):
 				while line[1].isupper() and pos < len(line) - 1 and (line[pos].isupper() or line[pos].isdigit() or line[pos] == ' ' or line[pos] == "," or line[pos] == ":"):
@@ -223,7 +274,7 @@ for file in files:
 			# As this does not appear to be repeated elsewhere,
 			# I have manually entered the data
 			if "AYES" in line and adler == "b1340b85":
-				ayesdict = {"LNP": 0, "ALP": 41, "KAP": 0, "INDEPENDENT": 2}
+				ayesdict = {"LNP": 0, "ALP": 41, "KAP": 0, "PHON": 0, "INDEPENDENT": 2}
 				division.write("</u><p>\nALP,  41<p>\nINDEPENDENT, 2<p>")
 
 				fullvotes = "AYES, 43:<p>\nALP,  41 -- Bailey, Boyd, Brown, Butcher, Byrne, Crawford, D'Ath, de Brenni, Dick, Donaldson, Enoch, Farmer, Fentiman,\nFurner,  Gilbert,  Grace,  Harper,  Hinchliffe,  Jones,  Kelly,  King,  Lauga,  Linard,  Lynham,  Madden,  Miles,  Miller,  O'Rourke,\nPalaszczuk,  Pearce, Pease, Pegg, Pitt, Power, Russo, Ryan, Saunders, Stewart, Trad, Whiting, Williams.<p>\nINDEPENDENT, 2 -- Gordon,  Pyne.<br>\n"
@@ -240,4 +291,6 @@ for file in files:
 		linenum = linenum + 1
 
 	os.chdir("../..")
+
+homepage.write("\n\t</ol>\n</body>\n")
 

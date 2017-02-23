@@ -73,11 +73,11 @@ int parse(FILE *index, int size, char proceedings[size], int isCouncil, int * us
 	char (*politicians)[100] = calloc(90, sizeof(*politicians));
 	char (*fullnames)[100] = calloc(90, sizeof(*fullnames));
 	char (*electorates)[100] = calloc(90, sizeof(*electorates));
-	int parties[89] = {0};
+	int *parties = calloc(89, sizeof(*parties));
 
 	importData_2Dc(dataset, 90, 100, partynames);
 	importData_2Dc(dataset, 90, 100, colors);
-	importData_1Di(dataset, 90, parties);
+	importData_1Di(dataset, 89, parties);
 	importData_2Dc(dataset, 90, 100, politicians);
 	importData_2Dc(dataset, 90, 100, fullnames);
 	importData_2Dc(dataset, 90, 100, electorates);
@@ -183,7 +183,7 @@ int parse(FILE *index, int size, char proceedings[size], int isCouncil, int * us
 				printf("%s\n", title1);
 				fputs(title1, webpage);
 				fputs("\n</title>\n<style>\nimg {\n\tfloat: right;\n\tmargin: 0 0 10px 10px;\n}\np {\n\tfont-size: 3vh;\n}\n#heading {\n\tfloat: left;\n}\n#menu {\n\tfloat: right;\n}#individuals {\n\tclear:both;\n}\n</style>\n</head>\n\n<body>", webpage);
-				fputs("\n\t<div id=\"heading\">\n\t<b style=\"font-size: large\">Victorian Parliament Tracker</b>\n\t</div>\n\n\t<div id=\"menu\">\n\t<a href=\"../../../index.html\">Home</a>\n\t<a href=\"../../../members.html\">People</a>\n\t<a href=\"../../../about.html\">About</a>\n\t</div>\n", webpage);
+				fputs("\n\t<div id=\"heading\">\n\t<b style=\"font-size: large\">Victorian Parliament Tracker</b>\n\t</div>\n\n\t<div id=\"menu\">\n\t<a href=\"../../../index.html\">Home</a>\n\t<a href=\"../../../members.html\">People</a>\n\t<a href=\"../../../about.html\">About</a>\n\t<a href=\"../../../qld/index.html\">Queensland</a>\n\t</div>\n", webpage);
 
 				fputs("\n\t<div id=\"individuals\">\n\t<br>\n\t<b>\n\t\t<center>\n\t\t\t", webpage);
 				fputs(title1, webpage);
