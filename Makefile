@@ -18,7 +18,7 @@ qldrelease: qldwebsite source
 	tar -cJf parliamenttracker_website_qld-$(VER).tar.xz LICENSE qld/index qld/divisions parliamenttracker_source_$(VER).tar.xz
 
 vicwebsite: parliamenttracker
-	./parliamenttracker docx/*docx
+	ulimit -s 65536 && ./parliamenttracker docx/*docx
 
 qldwebsite:
 	cd qld && python3 ./extract.py

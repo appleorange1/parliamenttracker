@@ -35,7 +35,6 @@ On Arch, you can install these packages with the command:
 
 *Build*
 To build the website, run the commands:
-$ ulimit -s 65536
 $ make docs
 $ make release
 
