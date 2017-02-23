@@ -5,3 +5,8 @@ do
 	echo "Extracting "$pdf
 	python3 pdf2txt.py -o $pdf".txt" $pdf
 done
+for pdf in `ls | grep DAILY.pdf`
+do
+	echo "Extracting "$pdf
+	python3 pdf2txt.py -o $pdf".txt" $pdf
+done
