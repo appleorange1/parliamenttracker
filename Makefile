@@ -30,7 +30,7 @@ docs: vicdocs qlddocs
 
 vicdocs:
 	cd docx &&  \
-	wget -w 3 --no-check-certificate -i proceedings && \
+	wget -w 3 -i proceedings && \
 	$(RENAME) "?Open" "" *Open ; \
 
 qlddocs:
