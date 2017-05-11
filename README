@@ -34,17 +34,24 @@ On Arch, you can install these packages with the command:
 # pip install pdfminer.six
 
 *Build*
+To build the website, you will need some data from the Parliament websites.
+While the Queensland Parliament documentation can be downloaded automatically,
+the Victorian Parliament documentation is moved quite frequently on the server,
+and I have not yet found a way to download it automatically.
+
+To get the Queensland documentation, run the command:
+$ make qlddocs
+
+To get the Victorian documentation, download all of the docx files from:
+http://www.parliament.vic.gov.au/assembly/votes-aamp-proceeding-minutes
+http://www.parliament.vic.gov.au/council/minutes-of-proceedings
+Please keep the original filenames (but remove anything after the "docx").
+
 To build the website, run the commands:
-$ make docs
 $ make release
 
-The "make docs" command downloads data from the Parliament websites.
-If you run this command once, you don't have to run it again next time
-you build.
-
 If you just want to make the Victorian or Queensland websites, you
-can use "make vicdocs" and "make vicrelease", and "make qlddocs" and
-"make qldrelease".
+can use "make vicrelease", and "make qldrelease".
 
 *Installing*
 If you just want to keep the website for personal viewing, just open
