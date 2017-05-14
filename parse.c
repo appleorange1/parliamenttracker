@@ -54,8 +54,12 @@ int parse(FILE *index, int size, char proceedings[size], int isCouncil, int * us
 		if (strtol(ymddate, &endptr, 10) < 20151031L) {
 			dataset = fopen("assembly.data.0","r");
 		}
-		else
+		else if(strtol(ymddate, &endptr, 10) < 20170307L) {
 			dataset = fopen("assembly.data.1","r");
+		}
+		else {
+			dataset = fopen("assembly.data.2", "r");
+		}
 		chdir("assembly/divisions");
 	}
 	else {

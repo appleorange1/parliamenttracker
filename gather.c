@@ -57,16 +57,18 @@ int main(int argc, char *argv[]) {
 		mkdir("index", 0777);
 	}
 
-	char housename[4][20] = {"assembly", "assembly", "council", "council"};
+	char housename[5][20] = {"assembly", "assembly", "assembly", "council", "council"};
 
 	int polipos = 1;
 	int data = 0;
-	while (data <= 3) {
+	while (data <= 4) {
 		FILE *dataset;
 		if (data == 0)
 			dataset = fopen("assembly.data.0", "r");
 		else if (data == 1)
 			dataset = fopen("assembly.data.1", "r");
+		else if (data == 2)
+			dataset = fopen("assembly.data.2", "r");
 		else if (data == 2)
 			dataset = fopen("council.data.0", "r");
 		else
