@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-char* firstPointer(char* p1, char* p2) {
+char const* firstPointer(char const* p1, char const* p2) {
 	if ((((intptr_t) p1 < (intptr_t) p2) && ((intptr_t) p1 != 0)) || ((intptr_t) p2 == 0))
 		return p1;
 	else

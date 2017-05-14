@@ -101,22 +101,40 @@ int getDivision(int tableOfAyes[1000], int tableOfNoes[1000], char (*politicians
 			}
 		}
 
-		//Searching for next section ("\n\n\t[0-9]" in Assembly,
-		//"\n[0-9]" in Council, "*   *"  or ""-----\n\n\n"
+		//Searching for next section ("\n\n\t[0-9]" or "\t[0-9]\t"
+		//or "\t[0-9][0-9]\t"
+		//in Assembly, "\n[0-9]" in Council, "*   *"  or ""-----\n\n\n"
 		//in Council Committee)
 		if((isCouncil == 0 && *(pointer+posi) == 0x0a && \
 		   *(pointer+1+posi) == 0x0a && \
 		   *(pointer+2+posi) == 0x09 && \
 		   *(pointer+3+posi) >= 0x30 && \
 		   *(pointer+3+posi) <= 0x39) || \
+
+		   (isCouncil == 0 && *(pointer+posi) == 0x0a && \
+		   *(pointer+1+posi) == 0x09 && \
+		   *(pointer+2+posi) >= 0x30 && \
+		   *(pointer+2+posi) <= 0x39 && \
+		   *(pointer+3+posi) == 0x09) || \
+
+		   (isCouncil == 0 && *(pointer+posi) == 0x0a && \
+		   *(pointer+1+posi) == 0x09 && \
+		   *(pointer+2+posi) >= 0x30 && \
+		   *(pointer+2+posi) <= 0x39 && \
+		   *(pointer+3+posi) >= 0x30 && \
+		   *(pointer+3+posi) <= 0x39 && \
+		   *(pointer+4+posi) == 0x09) || \
+
 		   (isCouncil == 1 && *(pointer+posi) == 0x0a && \
 		   *(pointer+1+posi) >= 0x30 && \
 		   *(pointer+2+posi) <= 0x39) || \
+
 		   (isCouncil == 1 && *(pointer+posi) == 0x2a && \
 		   *(pointer+1+posi) == 0x20 && \
 		   *(pointer+2+posi) == 0x20 && \
 		   *(pointer+3+posi) == 0x20 && \
 		   *(pointer+4+posi) == 0x2a) || \
+
 		   (isCouncil == 1 && *(pointer+posi) == 0x2d && \
 		   *(pointer+1+posi) == 0x2d && *(pointer+2+posi) == 0x2d && \
 		   *(pointer+3+posi) == 0x2d && *(pointer+4+posi) == 0x2d && \

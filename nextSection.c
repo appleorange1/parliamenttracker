@@ -17,27 +17,64 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include "getTitle.c"
 #include "firstPointer.c"
-char* nextSection(char const* pointer, int isCouncil) {
+char const* nextSection(char const* pointer, int isCouncil) {
 	char* section;
 	if (isCouncil == 0) {
-		section = strstr(pointer, "\n\n\t");
-			
+		char const* type1;
+		char const* type2;
+		char const* closestsection = 0;
+		type1 = strstr(pointer, "\n\n\t");
+		if (type1 != 0) {
+			// We want to make sure that there are no lower-case
+			// letters in the second letter of the title. Because
+			// the position of the second letter of the title
+			// varies, we check two different places. The reason
+			// we perform this check is to prevent one-letter titles
+			// from being treated as valid.
+
+			while ((*(type1+6) >= 0x61 && *(type1+6) <= 0x7A) || \
+			    (*(type1+7) >= 0x61 && *(type1+7) <= 0x7A)) {
+				type1 = strstr(type1+1, "\n\n\t");
+			}
+		}
+		int length = 3;
+		int num = 1;
+		while (num <= 200) {
+			char needle[20] = {0};
+			sprintf(needle, "\t%d\t", num);
+			type2 = strstr(pointer, needle);
+			if (type2 != 0) {
+				if ((intptr_t) type2 < (intptr_t) closestsection || (intptr_t) closestsection == 0 ) {
+					closestsection = type2;
+					if (num <= 9)
+						length = 3;
+					else if (num <= 99)
+						length = 4;
+					else
+						length = 5;
+				}
+			}
+			num++;
+		}
+		section = firstPointer(type1, closestsection);
+
 		if (section != 0) {
-			section = section + 3;
+			section = section + length;
 		}
 	}
 	else {
-		char* closestsection = 0;
+		char const* closestsection = 0;
 		int num = 1;
 		int length = 0;
 		while (num <= 200) {
 			char needle[20] = {0};
 			sprintf(needle, "\n%d\t", num);
-			char* commtype1 = strstr(pointer, "-----\n\n\n");
-			char* commtype2 = strstr(pointer, "*   *\n\n");
-			char* committeesection = firstPointer(commtype1, commtype2);
-			char* normalsection = strstr(pointer, needle);
+			char const* commtype1 = strstr(pointer, "-----\n\n\n");
+			char const* commtype2 = strstr(pointer, "*   *\n\n");
+			char const* committeesection = firstPointer(commtype1, commtype2);
+			char const* normalsection = strstr(pointer, needle);
 			if (normalsection != 0) {
 				if (firstPointer(normalsection, committeesection) == normalsection) {
 					if ((intptr_t) normalsection < (intptr_t) closestsection || (intptr_t) closestsection == 0 ) {
